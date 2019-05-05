@@ -9,12 +9,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import Listners.testlistner;
 import PageModels.Inbox;
 import PageModels.loginpage;
 import utility.ConfigFileReader;
 import utility.WebDriverClass;
 
 public class LoginToAccount {
+	private static Logger log = Logger.getLogger(testlistner.class);
 	loginpage loginPage;
 	Inbox inbox;
 	WebDriver driver;
@@ -35,7 +37,7 @@ public class LoginToAccount {
 			driver.get(config.getEnvironmentProperty("env"));
 		} catch (Exception ex) {
 			// TODO Auto-generated catch block
-			ex.printStackTrace();
+			log.info(ex.getMessage());
 		}
 	}
 
@@ -48,6 +50,7 @@ public class LoginToAccount {
 		loginPage.loginToApp();
 		inbox.validateInbox();
 		}catch(Exception e){
+			log.info(e.getMessage());
 		log.info("Test Failed :"+e.getMessage());
 		}
 	}
