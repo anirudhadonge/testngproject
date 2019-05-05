@@ -1,6 +1,5 @@
 package testclass;
 
-import java.io.FileInputStream;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -23,6 +22,8 @@ public class LoginToAccount {
 	WebDriver driver;
 	Properties prop;
 	ConfigFileReader config ;
+	
+	final static Logger log = Logger.getLogger(LoginToAccount.class);
 	@BeforeMethod
 	@Parameters("browser")
 	public void beforeMethod(String browser) {
@@ -50,6 +51,7 @@ public class LoginToAccount {
 		inbox.validateInbox();
 		}catch(Exception e){
 			log.info(e.getMessage());
+		log.info("Test Failed :"+e.getMessage());
 		}
 	}
 	

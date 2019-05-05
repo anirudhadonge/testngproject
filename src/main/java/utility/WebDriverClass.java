@@ -22,7 +22,7 @@ public class WebDriverClass {
 
 	public WebDriverClass(String browser) {
 		
-	PropertyConfigurator.configure(log4jConfPath);
+		PropertyConfigurator.configure(log4jConfPath);
 		String str = browser;
 		String Systemdir = System.getProperty("user.dir");
 		log.info("-----------"+Systemdir+"----------------------");
