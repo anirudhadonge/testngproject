@@ -1,8 +1,8 @@
 package testclass;
 
-import java.io.FileInputStream;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,6 +20,8 @@ public class LoginToAccount {
 	WebDriver driver;
 	Properties prop;
 	ConfigFileReader config ;
+	
+	final static Logger log = Logger.getLogger(LoginToAccount.class);
 	@BeforeMethod
 	@Parameters("browser")
 	public void beforeMethod(String browser) {
@@ -39,11 +41,15 @@ public class LoginToAccount {
 
 	@Test
 	public void loginAndValidate() {
-		loginPage.enterUserName(prop.getProperty("username"));
+		try{
+		loginPage.enterUserName(config.getEnvironmentProperty("username"));
 		loginPage.clickNextButton();
-		loginPage.enterPassword(prop.getProperty("password"));
+		loginPage.enterPassword(config.getEnvironmentProperty("password"));
 		loginPage.loginToApp();
 		inbox.validateInbox();
+		}catch(Exception e){
+		log.info("Test Failed :"+e.getMessage());
+		}
 	}
 	
 	@AfterMethod

@@ -1,6 +1,5 @@
 package Listners;
 
-import java.io.File;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -16,22 +15,24 @@ import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
 
 import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 
 public class testlistner implements ITestListener,IReporter,IInvokedMethodListener,ISuiteListener   {
+	//private static Logger log = Logger.getLogger(ConfigFileReader.class);
 	String log4jConfPath = System.getProperty("user.dir")+"/log4j.properties";
 	String extentReportHtmlReport = System.getProperty("user.dir")+"/extenthtmlReport.html";
 	private static Logger log = Logger.getLogger(testlistner.class);
 	ExtentReports extentReport ;
-	ExtentTest extentTest;
+	//String log4jConfPath = System.getProperty("user.dir")+"/log4j.properties";
+	
+
 	LogStatus logStatus;
 	public testlistner() {
-		PropertyConfigurator.configure(log4jConfPath);
+		/*PropertyConfigurator.configure(log4jConfPath);
 		extentReport = new ExtentReports(extentReportHtmlReport, true);
-		extentReport.addSystemInfo("OS", "Windows 10");
-		
+		extentReport.addSystemInfo("OS", "Windows 10");*/
+		PropertyConfigurator.configure(log4jConfPath);
 	}
 
 	@Override
@@ -54,13 +55,13 @@ public class testlistner implements ITestListener,IReporter,IInvokedMethodListen
 
 	@Override
 	public void onTestFailure(ITestResult arg0) {
-		extentTest.log(LogStatus.FAIL, arg0.getThrowable());
+		log.info(LogStatus.FAIL, arg0.getThrowable());
 	}
 
 	@Override
 	public void onTestSkipped(ITestResult arg0) {
 
-		extentTest.log(LogStatus.SKIP, arg0.getThrowable());
+		log.info(LogStatus.SKIP, arg0.getThrowable());
 		
 	}
 
@@ -72,7 +73,7 @@ public class testlistner implements ITestListener,IReporter,IInvokedMethodListen
 
 	@Override
 	public void onTestSuccess(ITestResult arg0) {
-		extentTest.log(LogStatus.PASS, arg0.getThrowable());
+		log.info(LogStatus.PASS, arg0.getThrowable());
 		
 	}
 
@@ -85,14 +86,14 @@ public class testlistner implements ITestListener,IReporter,IInvokedMethodListen
 	@Override
 	public void afterInvocation(IInvokedMethod testContext, ITestResult testResult) {
 
-		//extentTest.getTest().e
+		//log.getTest().e
 
 		
 	}
 
 	@Override
 	public void beforeInvocation(IInvokedMethod testContext, ITestResult arg1) {
-		extentTest = extentReport.startTest(testContext.getTestMethod().getMethodName());
+		//log = extentReport.startTest(testContext.getTestMethod().getMethodName());
 		
 	}
 
